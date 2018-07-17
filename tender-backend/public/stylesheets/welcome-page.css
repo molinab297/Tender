@@ -1,9 +1,9 @@
 body {
-  background-image:url("../resources/food-animation-1.gif");
+  background-image:url("../resources/food-animation-1.gif"), url("../resources/food-animation-1.gif");
   background-repeat:no-repeat;
   background-size: 50%;
   background-attachment: fixed;
-  background-position: bottom right;
+  background-position: bottom left, bottom right;
   background-color: #CF4134;
   padding-top: 90px;
 }

@@ -3,7 +3,6 @@ node_modules/
 npm-debug.log
 
 # deployd
-data/
 
 # other
 .DS_Store

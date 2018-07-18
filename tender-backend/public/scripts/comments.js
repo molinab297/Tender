@@ -31,9 +31,9 @@
 
     var $label = $('<label></label>');
 
-    var description = "test";
+    var commentText = comment.text;
 
-    $label.append(description);
+    $label.append(commentText);
     $div.append($label);
 
     this.$element = $div;

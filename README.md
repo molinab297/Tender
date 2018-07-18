@@ -2,7 +2,7 @@
 People who take pictures of their food can argue about whose food looks tastier!
 
 ### Development
-1). ```git clone ``` <br>
+1). ```git clone <repository URL>``` <br>
 2). ```cd Tender/tender-backend ``` <br>
 3). ```npm install ``` <br>
 4). ```dpd -d ``` <br>

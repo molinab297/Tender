@@ -6,7 +6,7 @@
   var COMMENT_LIST_SELECTOR = '[test="commentlist"]';
   var CommentList = App.CommentList;
   var commentList = new CommentList(COMMENT_LIST_SELECTOR);
-
+  //commentList.addRow.call(commentList, data);
 
   // Redirect user to welcome screen if they aren't already logged in.
   dpd.users.me(function(user) {
@@ -23,6 +23,6 @@
     });
   });
 
-  //commentList.addRow.call(commentList, data);
+
 
 })(window);

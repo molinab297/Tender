@@ -1,6 +1,12 @@
 (function (window) {
   "use strict";
   var $ = window.jQuery;
+  var App = window.App;
+
+  var COMMENT_LIST_SELECTOR = '[test="commentlist"]';
+  var CommentList = App.CommentList;
+  var commentList = new CommentList(COMMENT_LIST_SELECTOR);
+
 
   // Redirect user to welcome screen if they aren't already logged in.
   dpd.users.me(function(user) {
@@ -16,5 +22,7 @@
       location.href = "welcome.html";
     });
   });
+
+  //commentList.addRow.call(commentList, data);
 
 })(window);

@@ -49,21 +49,25 @@
    *             the email address and password that the user entered.
    */
   loginFormHandler.addSubmitHandler(function (data) {
-    // Attemp to login
-    dpd.users.login({username: data.emailAddress, password: data.password}, function(session, error) {
+    // Attempt to login
+    login(data);
+  });
+
+  var login = function(credentials) {
+    dpd.users.login({username: credentials.emailAddress, password: credentials.password}, function(session, error) {
       if (error) {
         alert(error.message);
       } else {
         location.href = "/index.html";
       }
     });
-  });
+  };
 
   /*
    * Add a form handler for the register page.
    *
    * @param data The form data the was entered by the user. This data contains
-   *             the new email address and password that the user entered.
+   ;*             the new email address and password that the user entered.
    */
   registerFormHandler.addSubmitHandler(function (data) {
     // Make sure user entered the same password twice.
@@ -71,10 +75,9 @@
       $("#register-account-popup-msg").text("Passwords do not match!");
       $("#register-account-popup").modal({});
     } else {
-      // Attemp to register the new account.
+      // Attempt to register the new account.
       dpd.users.post({username: data.emailAddress, password: data.password}).then(function(newAccount) {
-        $("#register-account-popup-msg").text("Successfully created the account!");
-        $("#register-account-popup").modal({});
+        login(data);
         console.log("Created new account: " + newAccount);
       },
       // Error encountered

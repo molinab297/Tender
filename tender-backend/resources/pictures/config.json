@@ -8,6 +8,14 @@
 			"required": false,
 			"id": "file",
 			"order": 0
+		},
+		"message": {
+			"name": "message",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "message",
+			"order": 1
 		}
 	}
 }

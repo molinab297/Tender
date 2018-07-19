@@ -19,17 +19,19 @@
   // var foodList = new FoodList(FOOD_LIST_SELECTOR);
   //foodList.addRow.call(foodList, data);
 
-
-  // Redirect user to welcome screen if they aren't already logged in.
-  dpd.users.me(function(user) {
-    if (user) {
-      $("h1").text("Welcome, " + user.username + "!");
-    } else {
-      location.href = "welcome.html";
-    }
+  // Setup scrollbar animations
+  $(document).ready(function() {
+    $("#sidebar").mCustomScrollbar({
+      theme: "minimal"
+    });
+    $('#sidebarCollapse').on('click', function() {
+      $('#sidebar, #content').toggleClass('active');
+      $('.collapse.in').toggleClass('in');
+      $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    });
   });
 
-  $("#logout-btn").click(function() {
+  $("#logout").click(function() {
     dpd.users.logout(function(res, err) {
       location.href = "welcome.html";
     });

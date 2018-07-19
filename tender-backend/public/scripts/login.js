@@ -49,10 +49,14 @@
    *             the email address and password that the user entered.
    */
   loginFormHandler.addSubmitHandler(function (data) {
-    // Attempt to login
     login(data);
   });
 
+  /*
+   * Attempts to authenticate and login the user.
+   *
+   * @param credentials An object containing the users credentials (the username and password).
+   */
   var login = function(credentials) {
     dpd.users.login({username: credentials.emailAddress, password: credentials.password}, function(session, error) {
       if (error) {
@@ -77,8 +81,8 @@
     } else {
       // Attempt to register the new account.
       dpd.users.post({username: data.emailAddress, password: data.password}).then(function(newAccount) {
-        login(data);
         console.log("Created new account: " + newAccount);
+        login(data);
       },
       // Error encountered
       function(err) {

@@ -25,13 +25,12 @@
 
   function Row(comment) {
     var $div = $('<div></div>', {
-      'comment': 'label', // TODO fix according to html
-      'class': 'label'
+      'class': 'commentData'
     });
 
     var $label = $('<label></label>');
 
-    var commentText = comment.text;
+    var commentText = "test";
 
     $label.append(commentText);
     $div.append($label);

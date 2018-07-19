@@ -138,6 +138,30 @@ a.article, a.article:hover {
   color: #fff !important;
 }
 
+.friendList {
+  display: block;
+}
+
+.friendList .friendImg{
+  display: inline-block;
+  margin-left: 10px;
+  border-radius: 50%;
+  width: 17%;
+}
+
+.friendList .friendName{
+  display: inline-block;
+  font-size: large;
+}
+
+#friendSearchTextBox {
+  width: 100%;
+}
+
+#friendSearchButton {
+  margin-top: 10px;
+}
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */

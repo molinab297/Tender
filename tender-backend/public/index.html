@@ -29,17 +29,25 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3>Friends</h3>
+        <h3>Friend's List</h3>
       </div>
 
       <ul class="list-unstyled components">
-        <p>Friends List</p>
+        <!--<p>Friends List</p>-->
+        <li class="friendList">
+          <img class="friendList friendImg" src="http://placekitten.com/50/50">
+          <p class="friendList friendName" >Bob</p>
+        </li>
+        <li class="friendList">
+          <img class="friendList friendImg" src="http://placekitten.com/45/45">
+          <p class="friendList friendName" >Ashely</p>
+        </li>
       </ul>
 
       <ul class="list-unstyled CTAs">
         <h3>Find a Friend</h3>
-        <input type="text">
-        <li><a href="#" class="article">Add Friend</a></li>
+        <input id="friendSearchTextBox" type="text">
+        <li><a id="friendSearchButton" href="#" class="article">Add Friend</a></li>
       </ul>
     </nav>
 

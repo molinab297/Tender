@@ -41,7 +41,6 @@
 
     <!-- Page Content Holder -->
     <div id="content">
-
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -59,13 +58,15 @@
         </div>
       </nav>
 
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
       <div class="detailBox">
         <div class="titleBox">
           <label>Comment Box</label>
           <button type="button" class="close" aria-hidden="true">&times;</button>
         </div>
         <div class="commentBox">
-
+          <img src="" id="my_image" alt="">
           <p class="taskDescription">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
         </div>
         <div class="actionBox">
@@ -110,6 +111,29 @@
       </div>
       <div class="line"></div>
     </div>
+    <div create-post-form="form" class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Create Post</h4>
+          </div>
+          <div class="modal-body">
+            <input type="text" name="" value="">
+            <p>Some text in the modal.</p>
+            <input type="file" id="foodPicture" name="pic" accept="image/*">
+            <button type="button" id="submitButton" class="btn btn-default" onclick="convertToBase64()">Submit</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
   <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -117,6 +141,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- jQuery Custom Scroller CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="scripts/createPost.js" charset="utf-8"></script>
 
   <script type="text/javascript">
     $(document).ready(function() {
@@ -129,6 +154,17 @@
         $('.collapse.in').toggleClass('in');
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
+    });
+
+    $.put('http://localhost:2403/pictures', {
+      'file': 'bar'
+    }, function(result) {
+      // do something with the results of the AJAX call
+    });
+
+    $.get("http://localhost:2403/pictures", function(result) {
+      console.log(result);
+      $("#my_image").attr("src", result[0].file);
     });
   </script>
 </body>

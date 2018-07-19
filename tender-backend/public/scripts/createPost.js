@@ -17,11 +17,12 @@ function convertToBase64(callback) {
         $.get("http://localhost:2403/pictures", function(result) {
           console.log(result);
           $("#my_image").attr("src", result[0].file);
+          $("#my_description").text(result[1].message);
         });
       });
     };
     // close the modal box on submitted
-    document.getElementById("myModal").modal("hide");
+    $("#myModal").modal("hide");
     $("#submitError").hide();
 
     reader.onerror = function(error) {
@@ -38,6 +39,5 @@ function createPost(callback)
   console.log("Creating a Post");
   // Used if picture has been uploaded by user
   convertToBase64();
-  // Used if user has typed a message initial
 
 }

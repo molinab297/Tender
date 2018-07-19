@@ -1,13 +1,21 @@
 {
 	"type": "Collection",
 	"properties": {
+		"email": {
+			"name": "email",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "email",
+			"order": 0
+		},
 		"file": {
 			"name": "file",
 			"type": "string",
 			"typeLabel": "string",
 			"required": false,
 			"id": "file",
-			"order": 0
+			"order": 1
 		},
 		"message": {
 			"name": "message",
@@ -15,7 +23,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "message",
-			"order": 1
+			"order": 2
 		}
 	}
 }

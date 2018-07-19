@@ -184,33 +184,21 @@ a.article, a.article:hover {
     MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width: 768px) {
-  #sidebar {
-    margin-left: -250px;
-  }
-  #sidebar.active {
-    margin-left: 0;
-  }
-  #content {
-    width: 100%;
-  }
-  #content.active {
-    width: calc(100% - 250px);
-  }
-  #sidebarCollapse span {
-    display: none;
-  }
-}
-
 #postButton {
   margin-bottom: 20px;
 }
 
 @import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
 .detailBox {
-  width: 50%;
+  width: 65%;
   border: 1px solid #bbb;
   margin: auto;
+}
+
+#my_image{
+  max-height: 600px;
+  max-width: 100%;
+  text-align: center;
 }
 
 .titleBox {
@@ -286,4 +274,26 @@ a.article, a.article:hover {
 .actionBox {
   border-top: 1px dotted #bbb;
   padding: 10px;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -250px;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+  #content {
+    width: 100%;
+  }
+  #content.active {
+    width: calc(100% - 250px);
+  }
+  #sidebarCollapse span {
+    display: none;
+  }
+
+  .detailBox {
+    width: 90%;
+  }
 }

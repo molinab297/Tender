@@ -3,10 +3,11 @@ function convertToBase64(callback) {
 
   var $ = window.jQuery;
   var image = document.querySelector("input[type=file]").files[0];
-  // text for the photo posted
   var text = document.getElementById('foodMessage').value;
-  console.log(text);
   var reader = new FileReader();
+
+  // text for the photo posted
+  console.log(text);
   console.log(image);
   if (image) {
     reader.readAsDataURL(image);
@@ -100,6 +101,15 @@ function fillOutPost(imgSrc, message)
     '</div>' +
   '</div>' +
   '<div class="line"></div>');
+
+  var App = window.App;
+  var FormHandler = App.FormHandler;
+  var CommentList = App.CommentList;
+  var commentList = new CommentList( "[comment-list=\"list\"]");
+  var commentFormHandler = new FormHandler( "[comment-form=\"form\"]");
+  commentFormHandler.addSubmitHandler(function(data) {
+    commentList.addRow.call(commentList, data)
+  });
 }
 
 function createPost(callback)

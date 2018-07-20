@@ -7,14 +7,6 @@
   var $ = window.jQuery;
   var App = window.App;
   var FormHandler = App.FormHandler;
-  var CommentList = App.CommentList;
-
-  var commentList = new CommentList(COMMENT_LIST_SELECTOR);
-  var commentFormHandler = new FormHandler(COMMENT_FORM_SELECTOR);
-
-  commentFormHandler.addSubmitHandler(function(data) {
-    commentList.addRow.call(commentList, data)
-  });
 
   // var FRIENDS_LIST_SELECTOR = '[test="friendslist"]'; // TODO fix according to html
   // var FriendsList = App.FriendsList;

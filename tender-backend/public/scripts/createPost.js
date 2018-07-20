@@ -39,7 +39,7 @@ function intialPosts()
 {
   $.get("http://localhost:2403/pictures", function(result) {
     var i;
-    for(i = result.length-1; i >= 0; i--)
+    for(i = 0; i <= result.length-1; i++)
     {
       fillOutPost(result[i].file,result[i].message);
     }

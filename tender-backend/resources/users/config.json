@@ -1,3 +1,13 @@
 {
-	"type": "UserCollection"
+	"type": "UserCollection",
+	"properties": {
+		"following": {
+			"name": "following",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "following",
+			"order": 0
+		}
+	}
 }

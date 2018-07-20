@@ -24,6 +24,14 @@
 			"required": false,
 			"id": "message",
 			"order": 2
+		},
+		"comments": {
+			"name": "comments",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "comments",
+			"order": 3
 		}
 	}
 }

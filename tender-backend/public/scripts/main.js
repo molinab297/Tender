@@ -3,8 +3,7 @@
 
   const FOLLOW_USER_SELECTOR = "[follow-user-form=\"form\"]";
   const CREATE_POST_SELECTOR = "[create-post-form=\"form\"]";
-  // TODO: This might be pointing to the wrong html element.. but I'm not sure.
-  const FRIENDS_LIST_SELECTOR = "[class=\"list-unstyled components\"]";
+  const FRIENDS_LIST_SELECTOR = "[data-friends-list=\"list\"]";
   var $ = window.jQuery;
   var App = window.App;
   var FormHandler = App.FormHandler;
@@ -34,11 +33,9 @@
       const emailAddress = data["emailAddress"];
       // See if the email address maps to an already existing account
       dpd.users.get({username: emailAddress}).then(function(user){
-
           if (user.length !== 0){
               // Get the current user's credentials
               dpd.users.me(function(me, err) {
-                  alert(JSON.stringify(me, null, 4));
                   if (!err){
                       // Check to see if the current user is already following this user.
                       if ((typeof me.following === "undefined" || !me.following)
@@ -49,9 +46,9 @@
                                   console.log(err);
                               } else {
                                   console.log("Successfully added user" + emailAddress);
-                                  // TODO: #1 Need to update friends list on side bar
-                                  friendsList.add()
-                                  // TODO: #2 Need to update user's feed.
+                                  // TODO: Adding a new row to the friend's list isn't working.
+                                  friendsList.addRow(user[0].displayName);
+                                  // TODO: Need to update user's feed.
                               }
                           });
                       } else{

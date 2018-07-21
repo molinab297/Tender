@@ -25,13 +25,13 @@
 
   function Row(friend) {
     var $div = $('<div></div>', {
-      'friend': 'label', // TODO fix according to html
+      'data-friends-list': 'label', // TODO fix according to html
       'class': 'label'
     });
 
     var $label = $('<label></label>');
 
-    var friendName = friend.name;
+    var friendName = friend.displayName;
 
     $label.append(friendName);
     $div.append($label);

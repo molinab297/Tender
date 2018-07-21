@@ -18,6 +18,11 @@ a, a:hover, a:focus {
   transition: all 0.3s;
 }
 
+input[type=text] {
+    background-color: white;
+    color: black;
+}
+
 .navbar {
   padding: 15px 10px;
   background: #fff;

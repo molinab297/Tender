@@ -27,34 +27,42 @@
   };
 
 
+  // Get all of the pictures of the database and load them onto the home page.
   PostCreator.prototype.intializePosts = function() {
     console.log("Initializing posts");
     $.get("http://localhost:2403/pictures", function(result) {
-      var i;
-      for (i = 0; i <= result.length - 1; i++) {
-
-        // TODO get the database Id for the post object and use it to fillOutPost
-        var databaseId = -1
-
-        fillOutPost(result[i].file, result[i].message, databaseId);
-      }
+        result.forEach(function(post){
+            fillOutPost(post.file, post.message, post.id);
+        });
     });
   };
 
-  function submitPost(convertedImage, text) {
-
-    // post to the front end
-    var postObjectId = -1; // TODO give fillOutPost the Key ID for the post object we just created
-    fillOutPost(convertedImage, text, postObjectId);
-
-    // post to the backend
-    $.post('http://localhost:2403/pictures', {
-      'file': convertedImage, 'message': text
-    }, function(result) {
-      console.log(result);
-    });
+  /*
+   * Submits an image and its message to the database, and then updates the
+   * front end accordingly.
+   *
+   * @param convertedImage The Base64 string representation of the image.
+   * @param msg The image description.
+   */
+  function submitPost(convertedImage, msg) {
+      console.log("Submitting post");
+      // post to the backend
+      $.post('http://localhost:2403/pictures', {
+          'file': convertedImage, 'message': msg
+      }, function(result) {
+          // post to the front end
+          fillOutPost(result.file, result.message, result.id);
+          console.log(result);
+      });
   }
 
+  /*
+   * Converts an image to a Base64 string. This is required in order
+   * to upload the image to the database.
+   *
+   * @param image The image to convert.
+   * @param callback The callback function to apply to the converted image.
+   */
   function convertToBase64(image, callback) {
 
     var reader = new FileReader();
@@ -78,6 +86,13 @@
     }
   }
 
+  /*
+   * Posts an image to the front end.
+   *
+   * @param imgSrc The Base64 string representation of the image.
+   * @param message The image message.
+   * @param databaseId The UUID of the image.
+   */
   function fillOutPost(imgSrc, message, databaseId) {
     preparePostHtml(imgSrc, message, databaseId);
 

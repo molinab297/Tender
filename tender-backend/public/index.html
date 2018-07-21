@@ -47,8 +47,20 @@
 
       <ul class="list-unstyled CTAs">
         <h3>Find a Friend</h3>
-        <input id="friendSearchTextBox" type="text">
-        <li><a id="friendSearchButton" href="#" class="article">Add Friend</a></li>
+        <form follow-user-form="form" id="follow-user" role="form" style="display: block;">
+          <div class="form-group">
+            <input type="text" name="emailAddress" id="user-email" tabindex="1" class="form-control"
+                   placeholder="Email" value="" autofocus required>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6">
+                <input type="submit" name="follow-user-submit" id="follow-user-submit" tabindex="4"
+                       class="form-control btn btn-login" value="Follow">
+              </div>
+            </div>
+          </div>
+        </form>
       </ul>
     </nav>
 
@@ -152,6 +164,25 @@
       </div>
     </div>
 
+    <!-- The Modal to display when searching for a non-existent user -->
+    <div class="modal fade" id="alert-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="alert-modal-title">Title text here</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="alert-modal-body">Body text here</div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -164,6 +195,7 @@
   <!-- <script src="scripts/foods.js" charset="utf-8"></script> -->
   <script src="scripts/comments.js" charset="utf-8"></script>
   <script src="scripts/createPost.js" charset="utf-8"></script>
+  <script src="scripts/validation.js" charset="utf-8"></script>
   <script src="scripts/main.js" charset="utf-8"></script>
 </body>
 

@@ -3,8 +3,8 @@
 	"properties": {
 		"following": {
 			"name": "following",
-			"type": "string",
-			"typeLabel": "string",
+			"type": "array",
+			"typeLabel": "array",
 			"required": false,
 			"id": "following",
 			"order": 0

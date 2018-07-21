@@ -9,6 +9,8 @@
   var PostCreator = App.PostCreator;
   var Validation = App.Validation;
   var postCreator = new PostCreator();
+  var followUserFormHandler = new FormHandler(FOLLOW_USER_SELECTOR);
+  var createPostFormHandler = new FormHandler(CREATE_POST_SELECTOR);
 
   // var FRIENDS_LIST_SELECTOR = '[test="friendslist"]'; // TODO fix according to html
   // var FriendsList = App.FriendsList;
@@ -20,7 +22,9 @@
   // var foodList = new FoodList(FOOD_LIST_SELECTOR);
   //foodList.addRow.call(foodList, data);
 
-  var followUserFormHandler = new FormHandler(FOLLOW_USER_SELECTOR);
+  /*
+   * Adds all of the business logic for the "Find a Friend" form.
+   */
   followUserFormHandler.addInputHandler(Validation.isValidEmail);
   followUserFormHandler.addSubmitHandler(function (data) {
     const emailAddress = data["emailAddress"];
@@ -31,18 +35,18 @@
              dpd.users.me(function(me, err) {
                  if (!err){
                     // Check to see if the current user is already following this user.
-                     if (!me.following.includes(emailAddress)){
+                     if (typeof me.following === "undefined" || !me.following.includes(emailAddress)){
                          // Update the current user's following list
                          dpd.users.put(me.id, {following: {$push: user[0].username}}, function(result, err){
                              if (err){
                                  console.log(err);
                              } else {
-                                 // Refresh the users feed with new pictures from the person they just started following.
-                                 postCreator.intializePosts();
+                                 console.log("Successfully added user" + emailAddress);
+                                 // TODO: Need to update the current user's feed.
                              }
                          });
                      } else{
-                         var popup = $('#alert-modal');
+                         const popup = $('#alert-modal');
                          popup.find('.alert-modal-title').text("Whoops! Sorry about that.");
                          popup.find('.alert-modal-body').text("You're already following \"" + emailAddress + "\"");
                          popup.modal('show');
@@ -52,7 +56,7 @@
                  }
              });
          } else{
-             var popup = $('#alert-modal');
+             const popup = $('#alert-modal');
              popup.find('.alert-modal-title').text("Whoops! Sorry about that.");
              popup.find('.alert-modal-body').text("We couldn't find an account with the email address \"" + emailAddress + "\"");
              popup.modal('show');
@@ -60,12 +64,16 @@
      });
   });
 
-  var createPostFormHandler = new FormHandler(CREATE_POST_SELECTOR);
+  /*
+   * Adds all of the business logic for the "Create New Post" button.
+   */
   createPostFormHandler.addSubmitHandler(function (data) {
     postCreator.createPost(data);
   });
 
-  // Setup scrollbar animations
+ /*
+  * Setup scrollbar animations for the "Friends" button.
+  */
   $(document).ready(function() {
     $("#sidebar").mCustomScrollbar({
       theme: "minimal"
@@ -77,7 +85,9 @@
     });
   });
 
-  // Setup logout functionality
+    /*
+     * Setup logout functionality.
+     */
   $("#logout").click(function() {
     dpd.users.logout(function(res, err) {
       location.href = "welcome.html";

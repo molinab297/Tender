@@ -1,12 +1,11 @@
 (function (window) {
   "use strict";
 
-  var COMMENT_FORM_SELECTOR = "[comment-form=\"form\"]";
-  var COMMENT_LIST_SELECTOR = "[comment-list=\"list\"]";
-
   var $ = window.jQuery;
   var App = window.App;
   var FormHandler = App.FormHandler;
+  var PostCreator = App.PostCreator;
+  var postCreator = new PostCreator();
 
   // var FRIENDS_LIST_SELECTOR = '[test="friendslist"]'; // TODO fix according to html
   // var FriendsList = App.FriendsList;
@@ -17,6 +16,11 @@
   // var FoodList = App.FoodList;
   // var foodList = new FoodList(FOOD_LIST_SELECTOR);
   //foodList.addRow.call(foodList, data);
+
+  var createPostFormHandler = new FormHandler("[create-post-form=\"form\"]");
+  createPostFormHandler.addSubmitHandler(function (data) {
+    postCreator.createPost(data);
+  });
 
   // Setup scrollbar animations
   $(document).ready(function() {
@@ -36,6 +40,8 @@
     });
   });
 
+  // Initialize the posts
+  postCreator.intializePosts();
 
 
 })(window);

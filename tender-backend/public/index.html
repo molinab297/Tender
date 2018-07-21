@@ -74,7 +74,7 @@
         <button type="button" id="postButton" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Create New Post</button>
       </div>
       <!-- Post  -->
-      <div hidden class="detailBox" >
+      <div hidden class="detailBox">
         <div class="titleBox">
           <label>Posted At Some Time by Location</label>
           <button type="button" class="close" aria-hidden="true">&times;</button>
@@ -127,7 +127,7 @@
       </div>
       <div hidden class="line"></div>
     </div>
-    <div create-post-form="form" class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -137,18 +137,18 @@
             <h4 class="modal-title">Create Post</h4>
           </div>
           <div class="modal-body">
-            <input type="text" id="foodMessage">
-            <p>Some text in the modal.</p>
-            <input type="file" id="foodPicture" name="pic" accept="image/*">
-            <button type="button" id="submitButton" class="btn btn-default" onclick="createPost()">Submit</button>
-            <p id="submitError" style="color: red" hidden>* A picture is required
-              <p>
+            <form create-post-form="form" id="create-post-form" class="form-inline" role="form">
+              <input name="description" type="text" id="foodMessage">
+              <p>Some text in the modal.</p>
+              <input type="file" id="foodPicture" name="pic" accept="image/*">
+              <input id="submitButton" type="submit" value="SUBMIT" class="btn" />
+              <p id="submitError" style="color: red" hidden>* A picture is required</p>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
-
       </div>
     </div>
 

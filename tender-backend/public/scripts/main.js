@@ -28,23 +28,30 @@
      dpd.users.get({username: emailAddress}).then(function(user){
          if (user.length !== 0){
              // Get the current user's credentials
-             dpd.users.me(function(result, err) {
+             dpd.users.me(function(me, err) {
                  if (!err){
-                     // Update the current user's following list
-                     dpd.users.put(result.id, {following: {$push: newFriend[0].username}}, function(result, err){
-                         if (err){
-                             console.log(err);
-                         } else {
-                             // Refresh the users feed with new pictures from the person they just started following.
-                             postCreator.intializePosts();
-                         }
-                     });
+                    // Check to see if the current user is already following this user.
+                     if (!me.following.includes(emailAddress)){
+                         // Update the current user's following list
+                         dpd.users.put(me.id, {following: {$push: user[0].username}}, function(result, err){
+                             if (err){
+                                 console.log(err);
+                             } else {
+                                 // Refresh the users feed with new pictures from the person they just started following.
+                                 postCreator.intializePosts();
+                             }
+                         });
+                     } else{
+                         var popup = $('#alert-modal');
+                         popup.find('.alert-modal-title').text("Whoops! Sorry about that.");
+                         popup.find('.alert-modal-body').text("You're already following \"" + emailAddress + "\"");
+                         popup.modal('show');
+                     }
                  } else{
                      console.log(err);
                  }
              });
          } else{
-             console.log("Could not find user!");
              var popup = $('#alert-modal');
              popup.find('.alert-modal-title').text("Whoops! Sorry about that.");
              popup.find('.alert-modal-body').text("We couldn't find an account with the email address \"" + emailAddress + "\"");

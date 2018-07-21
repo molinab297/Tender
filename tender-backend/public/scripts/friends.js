@@ -14,14 +14,14 @@
       throw new Error('Could not find element with selector: ' + selector);
     }
   }
-
-  FriendsList.prototype.addRow = function(friend) {
+  
+  function addRow(friend) {
     // Create a new instance of a row, using the coffee order info
     var rowElement = new Row(friend);
 
     // Add the new row instance's $element property to the checklist
     this.$element.append(rowElement.$element);
-  };
+  }
 
   function Row(friend) {
     var $div = $('<div></div>', {

@@ -24,13 +24,11 @@
    * @param fn The function to apply on the form data after it gets submitted by the user.
    */
   FormHandler.prototype.addSubmitHandler = function (fn) {
-    console.log("Setting submit handler for form");
     this.$formElement.on("submit", function (event) {
       event.preventDefault();
       var data = {};
       $(this).serializeArray().forEach(function (item) {
         data[item.name] = item.value;
-        console.log(item.name + " is " + item.value);
       });
       console.log(data);
       fn(data);
@@ -46,7 +44,6 @@
    * @param fn The validation method to apply on the text input by the user.
    */
   FormHandler.prototype.addInputHandler = function(fn){
-    console.log("Setting input handler for form");
     this.$formElement.on("input", "[name=\"emailAddress\"]", function (event){
       var emailAddress = event.target.value;
       var message = "";

@@ -42,7 +42,8 @@
                                  console.log(err);
                              } else {
                                  console.log("Successfully added user" + emailAddress);
-                                 // TODO: Need to update the current user's feed.
+                                 // TODO: #1 Need to update friends list on side bar
+                                 // TODO: #2 Need to update user's feed.
                              }
                          });
                      } else{

@@ -80,7 +80,7 @@
       $("#register-account-popup").modal({});
     } else {
       // Attempt to register the new account.
-      dpd.users.post({username: data.emailAddress, password: data.password}).then(function(newAccount) {
+      dpd.users.post({username: data.emailAddress, displayName: data.displayName, password: data.password}).then(function(newAccount) {
         console.log("Created new account: " + newAccount);
         login(data);
       },

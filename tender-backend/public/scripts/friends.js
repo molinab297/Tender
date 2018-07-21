@@ -14,7 +14,7 @@
       throw new Error('Could not find element with selector: ' + selector);
     }
   }
-  
+
   function addRow(friend) {
     // Create a new instance of a row, using the coffee order info
     var rowElement = new Row(friend);

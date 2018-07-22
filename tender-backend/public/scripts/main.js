@@ -20,16 +20,6 @@
 
   var followUserFormHandler = new FormHandler(FOLLOW_USER_SELECTOR);
 
-  // var FRIENDS_LIST_SELECTOR = '[test="friendslist"]'; // TODO fix according to html
-  // var FriendsList = App.FriendsList;
-  // var friendsList = new FriendsList(FRIENDS_LIST_SELECTOR);
-  //friendsList.addRow.call(friendsList, data);
-
-  // var FOOD_LIST_SELECTOR = '[test="foodlist"]'; // TODO fix according to html
-  // var FoodList = App.FoodList;
-  // var foodList = new FoodList(FOOD_LIST_SELECTOR);
-  //foodList.addRow.call(foodList, data);
-
   /*
    * Adds all of the business logic for the "Find a Friend" form.
    */

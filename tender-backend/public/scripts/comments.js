@@ -16,15 +16,15 @@
   }
 
   // default function called on submit handler for the add comment button
-  CommentList.prototype.addRow = function(commentText) {
-    var rowElement = new Row(commentText);
+  CommentList.prototype.addRow = function(commentText, timeLog) {
+    var rowElement = new Row(commentText,timeLog);
 
     // Add the new row instance's $element property to the checklist
     this.$element.append(rowElement.$element);
   };
 
   // generates dom elements for the comment to be added
-  function Row(comment) {
+  function Row(comment, timeLog) {
 
     var $div =
       '<li>' +
@@ -32,15 +32,15 @@
           '<img src="http://placekitten.com/40/40" />' +
         '</div>' +
         '<div class="commentText">' +
-          '<p class="">'+ text +'</p> <span class="date sub-text">on ' + date + '</span>' +
+          '<p class="">'+ comment +'</p> <span class="date sub-text">on ' + timeLog + '</span>' +
         '</div>' +
       '</li>';
 
-    var $label = $('<label></label>');
+    //var $label = $('<label></label>');
 
-    // user input
-    $label.append(comment);
-    $div.append($label);
+    // // user input
+    // $label.append(comment);
+    // $div.append($label);
 
     this.$element = $div;
   }
@@ -71,15 +71,15 @@
     comments.forEach(function(comment) {
 
       // dom elements for new comment
-      var $div = $('<div></div>', {
-        'class': 'commentData'
-      });
-
-      var $label = $('<label></label>');
-
-      // user input
-      $label.append(comment[1]);
-      $div.append($label);
+      var $div =
+        '<li>' +
+          '<div class="commenterImage">' +
+            '<img src="http://placekitten.com/40/40" />' +
+          '</div>' +
+          '<div class="commentText">' +
+            '<p class="">'+ comment[1] +'</p> <span class="date sub-text">on ' + comment[2] + '</span>' +
+          '</div>' +
+        '</li>';
 
       $commentList.append($div);
 

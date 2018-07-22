@@ -103,24 +103,29 @@
     var commentFormHandler = new FormHandler( document.getElementById(post.id).getElementsByClassName('form-inline') );
     commentFormHandler.addSubmitHandler(function(data) {
       const commentText = data.commentText;
-      commentList.addRow.call(commentList, commentText);
-      submitComment(databaseId, data.commentText)
+
+      // get current date
+      var d = new Date();
+      var option1 = { year: 'numeric', month: 'long', day: 'numeric' };
+      var option2 = { hour: 'numeric', minute: 'numeric'};
+      var timeLog = d.toLocaleDateString("en-US", option1) + " at " + d.toLocaleTimeString("en-US",option2);
+
+      commentList.addRow.call(commentList, commentText, timeLog);
+      submitComment(post.id, data.commentText, timeLog)
     });
     if (post.comments !== undefined) {
       commentList.initializeComments(post.comments, post.id);
     }
   }
 
-  function submitComment(id,text)
+  function submitComment(id,text, timeLog)
   {
-    var jsonPost = '{"comment_1": {"username": "a@a.com","message": "I hate u!"}}';
-    console.log(id);
     dpd.users.me(function(user) { //used to get user's name
       dpd.pictures.get(id, function(result, error) {
         console.log(result.comments);
       });
 
-      dpd.pictures.post(id, {"comments": {$push: [ user.username, text]}}, function(result) {
+      dpd.pictures.post(id, {"comments": {$push: [ user.username, text, timeLog]}}, function(result) {
         console.log(result);
       });
     });

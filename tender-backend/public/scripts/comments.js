@@ -26,9 +26,15 @@
   // generates dom elements for the comment to be added
   function Row(comment) {
 
-    var $div = $('<div></div>', {
-      'class': 'commentData'
-    });
+    var $div =
+      '<li>' +
+        '<div class="commenterImage">' +
+          '<img src="http://placekitten.com/40/40" />' +
+        '</div>' +
+        '<div class="commentText">' +
+          '<p class="">'+ text +'</p> <span class="date sub-text">on ' + date + '</span>' +
+        '</div>' +
+      '</li>';
 
     var $label = $('<label></label>');
 

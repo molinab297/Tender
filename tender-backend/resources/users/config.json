@@ -16,6 +16,14 @@
 			"required": false,
 			"id": "following",
 			"order": 1
+		},
+		"profilePicture": {
+			"name": "profilePicture",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "profilePicture",
+			"order": 2
 		}
 	}
 }

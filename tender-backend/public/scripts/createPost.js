@@ -13,12 +13,9 @@
   PostCreator.prototype.createPost = function(data) {
     console.log("Creating a Post");
 
+    //var image = data.pic; // TODO cant grab from form? so we use selector
     var image = document.getElementById('foodPicture').files[0];
-    var text = document.getElementById('foodMessage').value;
-
-    // TODO grab text and image from the form data parameter instead of getElementById
-    //var image = data.pic;
-    //var text = data.description;
+    var text = data.description;
 
     // Used if picture has been uploaded by user
     convertToBase64(image, function(convertedImage) {
@@ -30,6 +27,7 @@
   // Get all of the pictures of the database and load them onto the home page.
   PostCreator.prototype.intializePosts = function() {
     console.log("Initializing posts");
+    // TODO: filter by followers via backend
     $.get("http://localhost:2403/pictures", function(result) {
         result.forEach(function(post){
             fillOutPost(post.file, post.message, post.id);
@@ -126,7 +124,7 @@
       '<div class="actionBox">' +
         '<ul comment-list="list" id="commentList" class="commentList">' +
         '</ul>' +
-        '<form comment-form="form" id="comment-form" class="form-inline" role="form">' +
+        '<form comment-form="'+ databaseId +'" id="comment-form" class="form-inline" role="form">' +
           '<div class="form-group">' +
             '<input class="form-control" type="text" placeholder="Your comments" />' +
           '</div>' +

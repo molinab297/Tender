@@ -4,26 +4,44 @@
   var App = window.App || {};
   var $ = window.jQuery;
 
-  function FriendsList(selector) {
-    if (!selector) {
-      throw new Error('No selector provided');
-    }
+  function FriendsList() {
 
-    this.$element = $(selector);
-    if (this.$element.length === 0) {
-      throw new Error('Could not find element with selector: ' + selector);
-    }
   }
 
-  function addRow(friend) {
+  FriendsList.prototype.createFriend = function(name, profilePicture) {
+    console.log("Adding Following");
+    addRow(name, profilePicture);
+  };
+
+  function addRow(friend, profilePicture) {
     // Create a new instance of a row, using the coffee order info
-    var rowElement = new Row(friend);
+    Row(friend, profilePicture);
 
     // Add the new row instance's $element property to the checklist
-    this.$element.append(rowElement.$element);
   }
 
-  function Row(friend) {
+  function Row(friend, profilePicture) {
+
+    var li = document.createElement("LI");
+    li.className="friendList";
+
+    var para = document.createElement("P");
+    para.className="friendList friendName";
+
+    var img = document.createElement("IMG");
+    img.className="friendList friendImg";
+    //img.src=profilePicture; // TODO we need to add user image here
+
+    var name = document.createTextNode(friend);
+    para.appendChild(name);
+
+    li.appendChild(para);
+    li.appendChild(img);
+    document.getElementById("friendList").appendChild(li);
+
+    /*
+    var element = document.getElementById("friendList");
+    element.appendChild("<p class='friendList friendName'>Bob</p>");
     var $div = $('<div></div>', {
       'data-friends-list': 'label', // TODO fix according to html
       'class': 'label'
@@ -37,6 +55,8 @@
     $div.append($label);
 
     this.$element = $div;
+
+    */
   }
 
   App.FriendsList = FriendsList;

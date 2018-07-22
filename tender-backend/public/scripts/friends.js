@@ -8,19 +8,19 @@
 
   }
 
-  FriendsList.prototype.createFriend = function(data) {
+  FriendsList.prototype.createFriend = function(name, profilePicture) {
     console.log("Adding Following");
-    addRow(data);
+    addRow(name, profilePicture);
   };
 
-  function addRow(friend) {
+  function addRow(friend, profilePicture) {
     // Create a new instance of a row, using the coffee order info
-    Row(friend);
+    Row(friend, profilePicture);
 
     // Add the new row instance's $element property to the checklist
   }
 
-  function Row(friend) {
+  function Row(friend, profilePicture) {
 
     var li = document.createElement("LI");
     li.className="friendList";
@@ -30,7 +30,7 @@
 
     var img = document.createElement("IMG");
     img.className="friendList friendImg";
-    img.src=""; // TODO we need to add user image here
+    //img.src=profilePicture; // TODO we need to add user image here
 
     var name = document.createTextNode(friend);
     para.appendChild(name);

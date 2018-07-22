@@ -51,9 +51,9 @@
                                   console.log(err);
                               } else {
                                   console.log("Successfully added user" + emailAddress);
-                                  // TODO: Adding a new row to the friend's list isn't working.
-                                  friendsList.createFriend(user[0].displayName);
-                                  // TODO: Need to update user's feed.
+                                  dpd.users.get({displayName: user[0].displayName}, function(result){
+                                    friendsList.createFriend(user[0].displayName, result[0].profilePicture);
+                                  });
                               }
                           });
                       } else{

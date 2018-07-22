@@ -27,13 +27,30 @@
   // Get all of the pictures of the database and load them onto the home page.
   PostCreator.prototype.intializePosts = function() {
     console.log("Initializing posts");
-    // TODO: filter by followers via backend
-    $.get("http://localhost:2403/pictures", function(result) {
-        result.forEach(function(post){
-            fillOutPost(post);
+
+    dpd.users.me(function(me, err) {
+      if (!err){
+        const followList = me.following;
+        $.get("http://localhost:2403/pictures", function(result) {
+          result.forEach(function(post){
+            if (isFollowing(followList, post.email)) {
+              fillOutPost(post);
+            }
+          });
         });
+      } else{
+        console.log(err);
+      }
     });
-  };
+  }
+
+  function isFollowing(followList, email) {
+    return true;
+    //return typeof me.following === "undefined" || me.following.includes(emailAddress);
+  }
+
+
+
 
   /*
    * Submits an image and its message to the database, and then updates the

@@ -1,24 +1,22 @@
 (function (window) {
   "use strict";
 
-  const FOLLOW_USER_SELECTOR = "[follow-user-form=\"form\"]";
+  const FRIENDS_FORM_SELECTOR = "[follow-user-form=\"form\"]";
   const CREATE_POST_SELECTOR = "[create-post-form=\"form\"]";
   const FRIENDS_LIST_SELECTOR = "[data-friends-list=\"list\"]";
   var $ = window.jQuery;
   var App = window.App;
   var FormHandler = App.FormHandler;
-
   var PostCreator = App.PostCreator;
-  var postCreator = new PostCreator();
-  var createPostFormHandler = new FormHandler(CREATE_POST_SELECTOR);
-
   var FriendsList = App.FriendsList;
-  var friendsList = new FriendsList();
-  var friendsListFormHandler = new FormHandler(FRIENDS_LIST_SELECTOR);
-
   var Validation = App.Validation;
 
-  var followUserFormHandler = new FormHandler(FOLLOW_USER_SELECTOR);
+  var postCreator = new PostCreator();
+
+  var friendsList = new FriendsList(FRIENDS_LIST_SELECTOR);
+  var createPostFormHandler = new FormHandler(CREATE_POST_SELECTOR);
+  var followUserFormHandler = new FormHandler(FRIENDS_FORM_SELECTOR);
+
 
   /*
    * Adds all of the business logic for the "Find a Friend" form.
@@ -93,6 +91,25 @@
     dpd.users.logout(function(res, err) {
       location.href = "welcome.html";
     });
+  });
+
+  // Initialize friends
+  dpd.users.me(function(me, err) {
+    if (!err){
+      const followList = me.following;
+      var followEmailArray = string.split(',')
+      var friendObjectArray = [];
+      followEmailArray.forEach(function(email){
+        // TODO get the user object for each email
+        var userObject = undefined;
+        friendObjectArray.push(userObject);
+      });
+
+      if (friendObjectArray !== undefined)
+        friendsList.initializeFriends(friendObjectArray);
+    } else{
+      console.log(err);
+    }
   });
 
   // Initialize the posts

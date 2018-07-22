@@ -16,15 +16,15 @@
   }
 
   // default function called on submit handler for the add comment button
-  CommentList.prototype.addRow = function(commentText) {
-    var rowElement = new Row(commentText);
+  CommentList.prototype.addRow = function(commentText, timeLog) {
+    var rowElement = new Row(commentText,timeLog);
 
     // Add the new row instance's $element property to the checklist
     this.$element.append(rowElement.$element);
   };
 
   // generates dom elements for the comment to be added
-  function Row(comment) {
+  function Row(comment, timeLog) {
 
     var $div =
       '<li>' +
@@ -32,15 +32,15 @@
           '<img src="http://placekitten.com/40/40" />' +
         '</div>' +
         '<div class="commentText">' +
-          '<p class="">'+ text +'</p> <span class="date sub-text">on ' + date + '</span>' +
+          '<p class="">'+ comment +'</p> <span class="date sub-text">on ' + timeLog + '</span>' +
         '</div>' +
       '</li>';
 
-    var $label = $('<label></label>');
+    //var $label = $('<label></label>');
 
-    // user input
-    $label.append(comment);
-    $div.append($label);
+    // // user input
+    // $label.append(comment);
+    // $div.append($label);
 
     this.$element = $div;
   }
@@ -64,12 +64,11 @@
   //   }.bind(this));
   // };
 
-  CommentList.prototype.initializeComments = function(commentList, comments, id) {
+  CommentList.prototype.initializeComments = function(commentList, comments) {
 
     //view every array pair
     comments.forEach(function(comment) {
-      var commentText = comment[1];
-      commentList.addRow.call(commentList, commentText);
+      commentList.addRow.call(commentList, comment[1], comment[2]);
 
       //console.log(comment[0] + " " + comment[1]);
     });

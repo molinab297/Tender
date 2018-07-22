@@ -104,10 +104,10 @@
     commentFormHandler.addSubmitHandler(function(data) {
       const commentText = data.commentText;
       commentList.addRow.call(commentList, commentText);
-      submitComment(databaseId, data.commentText)
+      submitComment(post.id, data.commentText)
     });
     if (post.comments !== undefined) {
-      commentList.initializeComments(post.comments, post.id);
+      commentList.initializeComments(commentList, post.comments);
     }
   }
 

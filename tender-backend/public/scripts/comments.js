@@ -58,24 +58,12 @@
   //   }.bind(this));
   // };
 
-  CommentList.prototype.initializeComments = function(comments, id) {
-    //console.log("Initializing comments");
-    var $commentList = $(".commentList", "#" + id);
+  CommentList.prototype.initializeComments = function(commentList, comments, id) {
+
     //view every array pair
     comments.forEach(function(comment) {
-
-      // dom elements for new comment
-      var $div = $('<div></div>', {
-        'class': 'commentData'
-      });
-
-      var $label = $('<label></label>');
-
-      // user input
-      $label.append(comment[1]);
-      $div.append($label);
-
-      $commentList.append($div);
+      var commentText = comment[1];
+      commentList.addRow.call(commentList, commentText);
 
       //console.log(comment[0] + " " + comment[1]);
     });

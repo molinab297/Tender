@@ -7,13 +7,18 @@
   var $ = window.jQuery;
   var App = window.App;
   var FormHandler = App.FormHandler;
+
   var PostCreator = App.PostCreator;
-  var FriendsList = App.FriendsList;
-  var Validation = App.Validation;
   var postCreator = new PostCreator();
-  var friendsList = new FriendsList(FRIENDS_LIST_SELECTOR);
-  var followUserFormHandler = new FormHandler(FOLLOW_USER_SELECTOR);
   var createPostFormHandler = new FormHandler(CREATE_POST_SELECTOR);
+
+  var FriendsList = App.FriendsList;
+  var friendsList = new FriendsList();
+  var friendsListFormHandler = new FormHandler(FRIENDS_LIST_SELECTOR);
+
+  var Validation = App.Validation;
+
+  var followUserFormHandler = new FormHandler(FOLLOW_USER_SELECTOR);
 
   // var FRIENDS_LIST_SELECTOR = '[test="friendslist"]'; // TODO fix according to html
   // var FriendsList = App.FriendsList;
@@ -47,7 +52,7 @@
                               } else {
                                   console.log("Successfully added user" + emailAddress);
                                   // TODO: Adding a new row to the friend's list isn't working.
-                                  friendsList.addRow(user[0].displayName);
+                                  friendsList.createFriend(user[0].displayName);
                                   // TODO: Need to update user's feed.
                               }
                           });

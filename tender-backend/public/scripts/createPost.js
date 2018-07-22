@@ -30,8 +30,7 @@
     // TODO: filter by followers via backend
     $.get("http://localhost:2403/pictures", function(result) {
         result.forEach(function(post){
-            fillOutPost(post.file, post.message, post.id);
-            initializeComments(post.comments, post.id);
+            fillOutPost(post);
         });
     });
   };
@@ -53,7 +52,7 @@
           'email': user.username
         }, function(result) {
             // post to the front end
-            fillOutPost(result.file, result.message, result.id);
+            fillOutPost(result);
             console.log(result);
         });
       });
@@ -96,16 +95,34 @@
    * @param message The image message.
    * @param databaseId The UUID of the image.
    */
-  function fillOutPost(imgSrc, message, databaseId) {
-    preparePostHtml(imgSrc, message, databaseId);
+  function fillOutPost(post) {
+    preparePostHtml(post.file, post.message, post.id);
 
     // attach the form handler for comments
-    var commentList = new CommentList( document.getElementById(databaseId).getElementsByClassName('commentList') );
-    var commentFormHandler = new FormHandler( document.getElementById(databaseId).getElementsByClassName('form-inline') );
+    var commentList = new CommentList( document.getElementById(post.id).getElementsByClassName('commentList') );
+    var commentFormHandler = new FormHandler( document.getElementById(post.id).getElementsByClassName('form-inline') );
     commentFormHandler.addSubmitHandler(function(data) {
-      commentList.addRow.call(commentList);
+      const commentText = data.commentText;
+      commentList.addRow.call(commentList, commentText);
+      submitComment(databaseId, data.commentText)
     });
 
+    commentList.initializeComments(post.comments, post.id);
+  }
+
+  function submitComment(id,text)
+  {
+    var jsonPost = '{"comment_1": {"username": "a@a.com","message": "I hate u!"}}';
+    console.log(id);
+    dpd.users.me(function(user) { //used to get user's name
+      dpd.pictures.get(id, function(result, error) {
+        console.log(result.comments);
+      });
+
+      dpd.pictures.post(id, {"comments": {$push: [ user.username, text]}}, function(result) {
+        console.log(result);
+      });
+    });
   }
 
   function preparePostHtml(imgSrc, message, databaseId) {
@@ -127,7 +144,7 @@
         '</ul>' +
         '<form comment-form="'+ databaseId +'" id="comment-form" class="form-inline" role="form">' +
           '<div class="form-group">' +
-            '<input class="form-control" type="text" placeholder="Your comments" />' +
+            '<input class="form-control" name="commentText" type="text" placeholder="Your comments" />' +
           '</div>' +
           '<div class="form-group">' +
             '<button class="btn btn-default">Add</button>' +

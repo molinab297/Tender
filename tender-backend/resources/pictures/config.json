@@ -27,8 +27,8 @@
 		},
 		"comments": {
 			"name": "comments",
-			"type": "string",
-			"typeLabel": "string",
+			"type": "array",
+			"typeLabel": "array",
 			"required": false,
 			"id": "comments",
 			"order": 3

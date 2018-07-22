@@ -47,12 +47,16 @@
   function submitPost(convertedImage, msg) {
       console.log("Submitting post");
       // post to the backend
-      $.post('http://localhost:2403/pictures', {
-          'file': convertedImage, 'message': msg
-      }, function(result) {
-          // post to the front end
-          fillOutPost(result.file, result.message, result.id);
-          console.log(result);
+      dpd.users.me(function(user) { //used to get user's name
+        $.post('http://localhost:2403/pictures', {
+          'file': convertedImage,
+          'message': msg,
+          'email': user.username
+        }, function(result) {
+            // post to the front end
+            fillOutPost(result.file, result.message, result.id);
+            console.log(result);
+        });
       });
   }
 
@@ -97,20 +101,18 @@
     preparePostHtml(imgSrc, message, databaseId);
 
     // attach the form handler for comments
-    // TODO use the databaseId as the selector for these
-    // to attach to the unique comment box object
-    var commentList = new CommentList("[comment-list=\"list\"]"); // TODO change selector
-    var commentFormHandler = new FormHandler("[comment-form=\"form\"]"); // TODO change selector
+    var commentList = new CommentList( document.getElementById(databaseId).getElementsByClassName('commentList') );
+    var commentFormHandler = new FormHandler( document.getElementById(databaseId).getElementsByClassName('form-inline') );
     commentFormHandler.addSubmitHandler(function(data) {
-      commentList.addRow.call(commentList, data)
+      commentList.addRow.call(commentList);
     });
+
   }
 
   function preparePostHtml(imgSrc, message, databaseId) {
-    // TODO give this comment box div a unique ID corresponding to the database key for the post object
 
     $("#content > div:nth-child(2)").after(
-    '<div class="detailBox">' +
+    '<div class="detailBox" id=' + databaseId + ' >' +
       '<div class="titleBox">' +
         '<label>Posted At Some Time by Location</label>' +
         '<button type="button" class="close" aria-hidden="true">&times;</button>' +
@@ -123,30 +125,6 @@
       '</div>' +
       '<div class="actionBox">' +
         '<ul comment-list="list" id="commentList" class="commentList">' +
-          '<li>' +
-            '<div class="commenterImage">' +
-              '<img src="http://placekitten.com/50/50" />' +
-            '</div>' +
-            '<div class="commentText">' +
-              '<p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>' +
-            '</div>' +
-          '</li>' +
-          '<li>' +
-            '<div class="commenterImage">' +
-              '<img src="http://placekitten.com/45/45" />' +
-            '</div>' +
-            '<div class="commentText">' +
-              '<p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>' +
-            '</div>' +
-          '</li>' +
-          '<li>' +
-            '<div class="commenterImage">' +
-              '<img src="http://placekitten.com/40/40" />' +
-            '</div>' +
-            '<div class="commentText">' +
-              '<p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>' +
-            '</div>' +
-          '</li>' +
         '</ul>' +
         '<form comment-form="form" id="comment-form" class="form-inline" role="form">' +
           '<div class="form-group">' +

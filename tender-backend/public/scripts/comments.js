@@ -15,29 +15,72 @@
     }
   }
 
+  // default function called on submit handler for the add comment button
   CommentList.prototype.addRow = function(comment) {
-    // Create a new instance of a row, using the coffee order info
-    var rowElement = new Row(comment);
+
+    // To figure out the unique post id
+    var variable = this.$element;
+    variable = variable[0].parentElement.parentElement.id;
+
+    // find the text input form where the unique post id exist
+    var text = $(".form-control", "#"+variable).val();
+
+    var rowElement = new Row(comment,text);
 
     // Add the new row instance's $element property to the checklist
     this.$element.append(rowElement.$element);
+
+    submitComment(variable,text);
   };
 
-  function Row(comment) {
+  // TODO Finish Initialization of comments on website refresh
+  // function InitializeComments()
+  // {
+  //   console.log("Initializing comments");
+  //   $.get("http://localhost:2403/pictures", function(result) {
+  //       var counter = 0;
+  //       result.forEach(function(comment){
+  //           fillOutPost(post.id, comment.comments[0]);
+  //       });
+  //   });
+  // }
+
+// generates dom elements for the comment to be added
+  function Row(comment,text) {
+
     var $div = $('<div></div>', {
       'class': 'commentData'
     });
 
     var $label = $('<label></label>');
 
-    var commentText = "test";
-
-    $label.append(commentText);
+    // user input
+    $label.append(text);
     $div.append($label);
 
     this.$element = $div;
   }
 
+  function submitComment(id,text)
+  {
+    var jsonPost = '{"comment_1": {"username": "a@a.com","message": "I hate u!"}}';
+    console.log(id);
+    dpd.users.me(function(user) { //used to get user's name
+      // $.put('http://localhost:2403/pictures/' + id, {
+      //   'message': "IhateThis",
+      //   'email': "fagot@cokc.com"
+      // }, function(result) {
+      //     console.log(result);
+      // });
+      dpd.pictures.get(id, function(result, error) {
+        console.log(result.comments);
+      });
+
+      dpd.pictures.post(id, {"comments": {$push: [ user.username, text]}}, function(result) {
+        console.log(result);
+      });
+    });
+  }
   // Function for removing comment row:
   // CommentList.prototype.removeRow = function(id) {
   //   this.$element

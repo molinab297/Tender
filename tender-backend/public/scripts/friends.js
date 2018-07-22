@@ -30,33 +30,15 @@
 
     var img = document.createElement("IMG");
     img.className="friendList friendImg";
-    //img.src=profilePicture; // TODO we need to add user image here
+    img.src=profilePicture; // TODO we need to add user image here
 
     var name = document.createTextNode(friend);
     para.appendChild(name);
 
-    li.appendChild(para);
     li.appendChild(img);
+    li.appendChild(para);
+    console.log(li);
     document.getElementById("friendList").appendChild(li);
-
-    /*
-    var element = document.getElementById("friendList");
-    element.appendChild("<p class='friendList friendName'>Bob</p>");
-    var $div = $('<div></div>', {
-      'data-friends-list': 'label', // TODO fix according to html
-      'class': 'label'
-    });
-
-    var $label = $('<label></label>');
-
-    var friendName = friend.displayName;
-
-    $label.append(friendName);
-    $div.append($label);
-
-    this.$element = $div;
-
-    */
   }
 
   App.FriendsList = FriendsList;

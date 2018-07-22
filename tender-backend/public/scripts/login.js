@@ -1,4 +1,4 @@
-(function (window) {
+(function(window) {
   "use strict";
 
   // Variable declarations go here
@@ -48,7 +48,7 @@
    * @param data The form data the was entered by the user. This data contains
    *             the email address and password that the user entered.
    */
-  loginFormHandler.addSubmitHandler(function (data) {
+  loginFormHandler.addSubmitHandler(function(data) {
     login(data);
   });
 
@@ -58,7 +58,10 @@
    * @param credentials An object containing the users credentials (the username and password).
    */
   var login = function(credentials) {
-    dpd.users.login({username: credentials.emailAddress, password: credentials.password}, function(session, error) {
+    dpd.users.login({
+      username: credentials.emailAddress,
+      password: credentials.password
+    }, function(session, error) {
       if (error) {
         alert(error.message);
       } else {
@@ -73,27 +76,41 @@
    * @param data The form data the was entered by the user. This data contains
    ;*             the new email address and password that the user entered.
    */
-  registerFormHandler.addSubmitHandler(function (data) {
+  registerFormHandler.addSubmitHandler(function(data) {
     // Make sure user entered the same password twice.
-    if ($("#new-password").val() !== $("#confirm-password").val()){
+    if ($("#new-password").val() !== $("#confirm-password").val()) {
       $("#register-account-popup-msg").text("Passwords do not match!");
       $("#register-account-popup").modal({});
     } else {
       // Attempt to register the new account.
-      dpd.users.post({username: data.emailAddress, displayName: data.displayName, password: data.password}).then(function(newAccount) {
-        console.log("Created new account: " + newAccount);
-        login(data);
-      },
-      // Error encountered
-      function(err) {
-        if (err.errors["username"] === "is already in use"){
-          $("#register-account-popup-msg").text("An account with this email already exists!");
-          $("#register-account-popup").modal({});
-        } else {
-          $("#register-account-popup-msg").text("An unknown error occured while trying to create the account.");
-          $("#register-account-popup").modal({});
+      var reader = new FileReader();
+      var file = document.querySelector('input[type=file]').files[0];
+      if (file) {
+        reader.readAsDataURL(file);
+        reader.onload = function() {
+          var profPic = reader.result;
+          console.log(profPic);
+          dpd.users.post({
+            username: data.emailAddress,
+            displayName: data.displayName,
+            password: data.password,
+            profilePicture: profPic
+          }).then(function(newAccount) {
+              console.log("Created new account: " + newAccount);
+              //login(data);
+            },
+            // Error encountered
+            function(err) {
+              if (err.errors["username"] === "is already in use") {
+                $("#register-account-popup-msg").text("An account with this email already exists!");
+                $("#register-account-popup").modal({});
+              } else {
+                $("#register-account-popup-msg").text("An unknown error occured while trying to create the account.");
+                $("#register-account-popup").modal({});
+              }
+            });
         }
-      });
+      }
     }
   });
 

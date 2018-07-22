@@ -31,6 +31,7 @@
     $.get("http://localhost:2403/pictures", function(result) {
         result.forEach(function(post){
             fillOutPost(post.file, post.message, post.id);
+            initializeComments(post.comments, post.id);
         });
     });
   };

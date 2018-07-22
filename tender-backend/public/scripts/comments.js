@@ -33,18 +33,6 @@
     submitComment(variable,text);
   };
 
-  // TODO Finish Initialization of comments on website refresh
-  // function InitializeComments()
-  // {
-  //   console.log("Initializing comments");
-  //   $.get("http://localhost:2403/pictures", function(result) {
-  //       var counter = 0;
-  //       result.forEach(function(comment){
-  //           fillOutPost(post.id, comment.comments[0]);
-  //       });
-  //   });
-  // }
-
 // generates dom elements for the comment to be added
   function Row(comment,text) {
 
@@ -102,3 +90,30 @@
   App.CommentList = CommentList;
   window.App = App;
 })(window);
+
+
+// TODO Need to be refactored or be able to use class functions of CommentList
+
+function initializeComments(comments,id)
+{
+  //console.log("Initializing comments");
+  var $commentList = $(".commentList", "#"+id);
+  //view every array pair
+  comments.forEach(function(comment){
+
+    // dom elements for new comment
+    var $div = $('<div></div>', {
+      'class': 'commentData'
+    });
+
+    var $label = $('<label></label>');
+
+    // user input
+    $label.append(comment[1]);
+    $div.append($label);
+
+    $commentList.append($div);
+
+    //console.log(comment[0] + " " + comment[1]);
+  });
+}

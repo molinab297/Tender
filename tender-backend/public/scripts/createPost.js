@@ -106,8 +106,9 @@
       commentList.addRow.call(commentList, commentText);
       submitComment(databaseId, data.commentText)
     });
-
-    commentList.initializeComments(post.comments, post.id);
+    if (post.comments !== undefined) {
+      commentList.initializeComments(post.comments, post.id);
+    }
   }
 
   function submitComment(id,text)

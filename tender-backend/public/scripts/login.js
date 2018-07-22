@@ -97,7 +97,7 @@
             profilePicture: profPic
           }).then(function(newAccount) {
               console.log("Created new account: " + newAccount);
-              //login(data);
+              login(data);
             },
             // Error encountered
             function(err) {

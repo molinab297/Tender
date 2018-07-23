@@ -51,12 +51,12 @@
     return li;
   }
 
-  FriendsList.prototype.initializeFriends = function(friendsList) {
+  FriendsList.prototype.initializeFriends = function(friend, profPic) {
 
     //view every array pair
-    friendsList.forEach(function(friend) {
-      addRow(friend.displayName, friend.profilePicture);
-    });
+    console.log("in initializeFriends");
+    console.log(friend);
+    addRow(friend, profPic);
   }
 
   App.FriendsList = FriendsList;

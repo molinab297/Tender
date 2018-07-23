@@ -96,17 +96,12 @@
   // Initialize friends
   dpd.users.me(function(me, err) {
     if (!err){
-      const followList = me.following;
-      var followEmailArray = string.split(',')
-      var friendObjectArray = [];
-      followEmailArray.forEach(function(email){
-        // TODO get the user object for each email
-        var userObject = undefined;
-        friendObjectArray.push(userObject);
-      });
-
-      if (friendObjectArray !== undefined)
-        friendsList.initializeFriends(friendObjectArray);
+      console.log(me.following);
+      for (var i = 0; i < me.following.length; i++) {
+        dpd.users.get({username: me.following[i]}, function(result){
+          friendsList.initializeFriends(result[0].displayName, result[0].profilePicture);
+        });
+      }
     } else{
       console.log(err);
     }

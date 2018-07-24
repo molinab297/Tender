@@ -26,17 +26,20 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h1 id="welcome-msg">Welcome</h1>
         <img class="profilepic" id="welcome-user-pic" src="">
-        <h3>Friend's List</h3>
+        <h2 id="welcome-msg"></h1>
+      </div>
+      <div id="friendList-header">
+        <div id="friendList-Title">
+          <h3> My Follow List</h3>
+        </div>
+        <ul id="friendList" data-friends-list="list" class="list-unstyled components">
+          <!--<p>Friends List</p>-->
+        </ul>
       </div>
 
-      <ul id="friendList" data-friends-list="list" class="list-unstyled components">
-        <!--<p>Friends List</p>-->
-      </ul>
-
       <ul class="list-unstyled CTAs">
-        <h3>Find a Friend</h3>
+        <h3>Follow People</h3>
         <form follow-user-form="form" id="follow-user" role="form" style="display: block;">
           <div class="form-group">
             <input type="text" name="emailAddress" id="user-email" tabindex="1" class="form-control"
@@ -61,7 +64,7 @@
           <div class="navbar-header">
             <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
                                 <i class="glyphicon glyphicon-align-left"></i>
-                                <span>Friends</span>
+                                <span>Follow List</span>
                             </button>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

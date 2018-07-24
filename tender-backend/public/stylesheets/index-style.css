@@ -28,7 +28,7 @@ input[type=text] {
   background: #fff;
   border: none;
   border-radius: 0;
-  margin-bottom: 20px;
+
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -63,9 +63,13 @@ input[type=text] {
   left: 0;
   height: 100vh;
   z-index: 999;
-  background: #CF4134;
+  background: #C30500;
   color: #fff;
   transition: all 0.3s;
+}
+
+#welcome-msg {
+  text-align: center;
 }
 
 #sidebar.active {
@@ -73,13 +77,13 @@ input[type=text] {
 }
 
 #sidebar .sidebar-header {
-  padding: 20px;
-  background: #CF4134;
+  margin-top: 20px;
+  padding: 0px;
 }
 
 #sidebar ul.components {
-  padding: 20px 0;
-  border-bottom: 1px solid #47748b;
+  padding: 0;
+  padding-bottom: 10px;
 }
 
 #sidebar ul p {
@@ -148,15 +152,48 @@ a.article, a.article:hover {
 }
 
 .profilepic {
-  display: inline-block;
-  margin-left: 50px;
+  display: block;
+  margin: auto;
   border-radius: 50%;
   width: 50%;
 }
 
+#friendList-header{
+  background-color: #F30600;
+}
+
+#friendList-header  h3{
+  padding-top: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+  margin-left: 12px;
+  /* border-bottom: solid 5px #C30500; */
+}
+
+#friendList-Title{
+  margin-bottom: 10px;
+}
+
+#friendList{
+  /* background-color: #FF201B; */
+  padding-bottom: 10px;
+}
+#friendList ul{
+  /* background-color: #FF201B; */
+}
+
+#friendList li{
+    border-bottom: 4px solid #F30600;
+}
+
+.friendList{
+  margin-left: 12px;
+  background-color: #FF201B;
+  margin-right: 6px;
+}
+
 .friendList .friendImg{
   display: inline-block;
-  margin-left: 10px;
   border-radius: 50%;
   width: 17%;
 }

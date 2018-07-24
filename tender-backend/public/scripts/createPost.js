@@ -30,28 +30,26 @@
 
     dpd.users.me(function(me, err) {
       if (!err){
-        const followList = me.following;
+        if (me.following == null ) {
+          var followList = [me.username];
+        }
+        else {
+          var followList = me.following;
+          followList.push(me.username);
+        }
         $.get("http://localhost:2403/pictures", function(result) {
-          result.forEach(function(post){
-            if (isFollowing(followList, post.email)) {
-              fillOutPost(post);
+          for (var i = 0; i < result.length; i++) {
+            if (followList.includes(result[i].email)) {
+              fillOutPost(result[i]);
             }
-          });
+          }
         });
       } else{
         console.log(err);
       }
     });
   }
-
-  function isFollowing(followList, email) {
-    return true;
-    //return typeof me.following === "undefined" || me.following.includes(emailAddress);
-  }
-
-
-
-
+  
   /*
    * Submits an image and its message to the database, and then updates the
    * front end accordingly.

@@ -18,7 +18,6 @@
   // default function called on submit handler for the add comment button
   CommentList.prototype.addRow = function(commentText, timeLog) {
     var rowElement = new Row(commentText,timeLog);
-
     // Add the new row instance's $element property to the checklist
     this.$element.append(rowElement.$element);
   };

@@ -147,6 +147,13 @@ a.article, a.article:hover {
   display: block;
 }
 
+.profilepic {
+  display: inline-block;
+  margin-left: 50px;
+  border-radius: 50%;
+  width: 50%;
+}
+
 .friendList .friendImg{
   display: inline-block;
   margin-left: 10px;

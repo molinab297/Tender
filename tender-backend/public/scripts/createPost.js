@@ -127,6 +127,8 @@
       var option2 = { hour: 'numeric', minute: 'numeric'};
       var timeLog = d.toLocaleDateString("en-US", option1) + " at " + d.toLocaleTimeString("en-US",option2);
 
+      // add profile pic to comment
+
       commentList.addRow.call(commentList, commentText, timeLog);
       submitComment(post.id, data.commentText, timeLog)
     });

@@ -13,14 +13,10 @@
   <!-- Scrollbar Custom CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
   <script src="/dpd.js" type="text/javascript"></script>
-  <!-- Verify that user is logged in, otherwise redirect to welcome page.
-       TODO: While this works, the homepage still appears for a millisecond before
-       the user gets redirected to welcome.html. This seems to be caused by Chrome
-       retrieving the index.html from cache before this code executes. -->
+  <!-- Verify that user is logged in, otherwise redirect to welcome page. -->
   <script type="text/javascript">
     dpd.users.me(function(user) {
-      if (user) $("h1").text("Welcome, " + user.username + "!");
-      else location.href = "welcome.html";
+      if (!user) location.href = "welcome.html";
     });
   </script>
 </head>
@@ -30,6 +26,8 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
       <div class="sidebar-header">
+        <h1 id="welcome-msg">Welcome</h1>
+        <img class="profilepic" id="welcome-user-pic" src="">
         <h3>Friend's List</h3>
       </div>
 

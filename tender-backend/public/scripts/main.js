@@ -71,7 +71,8 @@
   });
 
  /*
-  * Setup scrollbar animations for the "Friends" button.
+  * Setup scrollbar animations for the "Friends" button. Also load user's profile picture
+  * at the top of the friends list.
   */
   $(document).ready(function() {
     $("#sidebar").mCustomScrollbar({
@@ -82,6 +83,10 @@
       $('.collapse.in').toggleClass('in');
       $('a[aria-expanded=true]').attr('aria-expanded', 'false');
     });
+      dpd.users.me(function(user){
+          $("#welcome-msg").text("Welcome, " + user.displayName + "!");
+          $("#welcome-user-pic").attr("src", user.profilePicture);
+      });
   });
 
  /*

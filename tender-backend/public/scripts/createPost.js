@@ -49,7 +49,7 @@
       }
     });
   }
-  
+
   /*
    * Submits an image and its message to the database, and then updates the
    * front end accordingly.
@@ -152,10 +152,6 @@
 
     $("#content > div:nth-child(2)").after(
     '<div class="detailBox" id=' + databaseId + ' >' +
-      '<div class="titleBox">' +
-        '<label>Posted At Some Time by Location</label>' +
-        '<button type="button" class="close" aria-hidden="true">&times;</button>' +
-      '</div>' +
       '<div class="commentBox">' +
         '<img src="'+ imgSrc + '" id="my_image" alt="">' +
       '</div>' +

@@ -41,6 +41,7 @@
                               } else {
                                   console.log("Successfully added user" + emailAddress);
                                   friendsList.createFriend(newFriend.displayName, newFriend.profilePicture);
+                                  location.reload();
                               }
                           });
                       } else{

@@ -39,7 +39,7 @@
 
     var img = document.createElement("IMG");
     img.className="friendList friendImg";
-    img.src=profilePicture; // TODO we need to add user image here
+    img.src=profilePicture;
 
     var name = document.createTextNode(friendName);
     para.appendChild(name);

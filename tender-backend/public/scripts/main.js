@@ -25,8 +25,9 @@
   followUserFormHandler.addSubmitHandler(function (data) {
       const emailAddress = data["emailAddress"];
       // See if the email address maps to an already existing account
-      dpd.users.get({username: emailAddress}).then(function(user){
-          if (user.length !== 0){
+      dpd.users.get({username: emailAddress}).then(function(result){
+          if (result.length !== 0){
+              var newFriend = result[0];
               // Get the current user's credentials
               dpd.users.me(function(me, err) {
                   if (!err){
@@ -34,14 +35,12 @@
                       if ((typeof me.following === "undefined" || !me.following)
                           || !me.following.includes(emailAddress)){
                           // Update the current user's following list
-                          dpd.users.put(me.id, {following: {$push: user[0].username}}, function(result, err){
+                          dpd.users.put(me.id, {following: {$push: newFriend.username}}, function(result, err){
                               if (err){
                                   console.log(err);
                               } else {
                                   console.log("Successfully added user" + emailAddress);
-                                  dpd.users.get({displayName: user[0].displayName}, function(result){
-                                    friendsList.createFriend(user[0].displayName, result[0].profilePicture);
-                                  });
+                                  friendsList.createFriend(newFriend.displayName, newFriend.profilePicture);
                               }
                           });
                       } else{
@@ -101,7 +100,6 @@
   // Initialize friends
   dpd.users.me(function(me, err) {
     if (!err){
-      console.log(me.following);
       for (var i = 0; i < me.following.length; i++) {
         dpd.users.get({username: me.following[i]}, function(result){
           friendsList.initializeFriends(result[0].displayName, result[0].profilePicture);

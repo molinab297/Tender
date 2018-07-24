@@ -117,32 +117,36 @@
     var commentList = new CommentList( document.getElementById(post.id).getElementsByClassName('commentList') );
     var commentFormHandler = new FormHandler( document.getElementById(post.id).getElementsByClassName('form-inline') );
     commentFormHandler.addSubmitHandler(function(data) {
-      const commentText = data.commentText;
 
-      // get current date
-      var d = new Date();
-      var option1 = { year: 'numeric', month: 'long', day: 'numeric' };
-      var option2 = { hour: 'numeric', minute: 'numeric'};
-      var timeLog = d.toLocaleDateString("en-US", option1) + " at " + d.toLocaleTimeString("en-US",option2);
+      dpd.users.me(function(user) { //used to get user's name
 
-      // add profile pic to comment
+        // get current date
+        var d = new Date();
+        var option1 = { year: 'numeric', month: 'long', day: 'numeric' };
+        var option2 = { hour: 'numeric', minute: 'numeric'};
+        var timeLog = d.toLocaleDateString("en-US", option1) + " at " + d.toLocaleTimeString("en-US",option2);
 
-      commentList.addRow.call(commentList, commentText, timeLog);
-      submitComment(post.id, data.commentText, timeLog)
+        // TODO getrid of this javascriptVoodoo extra parameter
+        var javascriptVoodoo = commentList;
+        commentList.addRow.call(javascriptVoodoo, data.commentText, timeLog, user.profilePicture);
+        submitComment(post.id, data.commentText, timeLog, user.profilePicture)
+      });
+
+
     });
     if (post.comments !== undefined) {
       commentList.initializeComments(commentList, post.comments);
     }
   }
 
-  function submitComment(id,text, timeLog)
+  function submitComment(id,text, timeLog, pic)
   {
     dpd.users.me(function(user) { //used to get user's name
       dpd.pictures.get(id, function(result, error) {
         console.log(result.comments);
       });
 
-      dpd.pictures.post(id, {"comments": {$push: [ user.username, text, timeLog]}}, function(result) {
+      dpd.pictures.post(id, {"comments": {$push: [ user.username, text, timeLog, pic]}}, function(result) {
         console.log(result);
       });
     });

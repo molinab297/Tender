@@ -16,19 +16,20 @@
   }
 
   // default function called on submit handler for the add comment button
-  CommentList.prototype.addRow = function(commentText, timeLog) {
-    var rowElement = new Row(commentText,timeLog);
+  // TODO we are calling this function with an extra parameter because VooDoo
+  CommentList.prototype.addRow = function(commentText, timeLog, pic) {
+    var rowElement = new Row(commentText,timeLog, pic);
     // Add the new row instance's $element property to the checklist
     this.$element.append(rowElement.$element);
   };
 
   // generates dom elements for the comment to be added
-  function Row(comment, timeLog) {
+  function Row(comment, timeLog, pic) {
 
     var $div =
       '<li>' +
         '<div class="commenterImage">' +
-          '<img src="http://placekitten.com/40/40" />' +
+          '<img src="'+ pic +'" />' +
         '</div>' +
         '<div class="commentText">' +
           '<p class="">'+ comment +'</p> <span class="date sub-text">on ' + timeLog + '</span>' +
@@ -67,7 +68,7 @@
 
     //view every array pair
     comments.forEach(function(comment) {
-      commentList.addRow.call(commentList, comment[1], comment[2]);
+      commentList.addRow.call(commentList, comment[1], comment[2], comment[3]);
 
       //console.log(comment[0] + " " + comment[1]);
     });
